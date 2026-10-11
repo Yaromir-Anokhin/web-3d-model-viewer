@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebGL 3D Mesh Viewer • Three.js</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- 3D Canvas WebGL Container -->
+    <div id="canvas-container"></div>
+
+    <!-- UI Overlay -->
+    <div id="ui-overlay">
+      <!-- Header -->
+      <header class="glass-panel header-panel">
+        <div class="logo-group">
+          <div class="logo-badge">3D</div>
+          <div>
+            <h1>WebGL Mesh Viewer</h1>
+            <p class="subtitle">Three.js • OBJ & GLTF/GLB Inspector</p>
+          </div>
+        </div>
+        <div id="model-status" class="status-badge">Default Mesh Loaded</div>
+      </header>
+
+      <!-- Drag & Drop Overlay Zone -->
+      <div id="drop-zone" class="glass-panel drop-zone">
+        <div class="drop-icon">📂</div>
+        <div class="drop-title">Drag & Drop 3D Model Here</div>
+        <div class="drop-subtitle">Supports <strong>.gltf</strong>, <strong>.glb</strong>, and <strong>.obj</strong> files</div>
+        <label for="file-input" class="browse-btn">Browse Local File</label>
+        <input type="file" id="file-input" accept=".gltf,.glb,.obj" />
+      </div>
+
+      <!-- Controls Control Panel -->
+      <aside class="glass-panel controls-panel">
+        <div class="panel-section-title">Viewport Controls</div>
+
+        <!-- Rendering Mode -->
+        <div class="control-group">
+          <label>Shading Mode</label>
+          <div class="toggle-group">
+            <button id="btn-solid" class="toggle-btn active">Solid</button>
+            <button id="btn-wireframe" class="toggle-btn">Wireframe</button>
+          </div>
+        </div>
+
+        <!-- Ambient Light Slider -->
+        <div class="control-group">
+          <div class="label-row">
+            <label for="ambient-slider">Ambient Light</label>
+            <span id="ambient-value" class="slider-val">1.2x</span>
+          </div>
+          <input type="range" id="ambient-slider" min="0" max="3" step="0.1" value="1.2" />
+        </div>
+
+        <!-- Directional Light Slider -->
+        <div class="control-group">
+          <div class="label-row">
+            <label for="directional-slider">Directional Light</label>
+            <span id="directional-value" class="slider-val">2.0x</span>
+          </div>
+          <input type="range" id="directional-slider" min="0" max="5" step="0.1" value="2.0" />
+        </div>
+
+        <!-- Grid & Axes Helper Toggles -->
+        <div class="control-group">
+          <label>Helpers</label>
+          <div class="checkbox-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="toggle-grid" checked />
+              <span>Ground Grid</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="toggle-axes" checked />
+              <span>Axes (XYZ)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Reset Camera & Preset Models -->
+        <div class="control-group action-buttons">
+          <button id="btn-reset-view" class="action-btn">Reset Camera View</button>
+          <button id="btn-load-torus" class="action-btn secondary">Load Demo Mesh</button>
+        </div>
+
+        <!-- Model Stats -->
+        <div class="panel-section-title stats-title">Mesh Statistics</div>
+        <div class="stats-box">
+          <div class="stat-row"><span>Vertices:</span> <strong id="stat-vertices">0</strong></div>
+          <div class="stat-row"><span>Triangles:</span> <strong id="stat-triangles">0</strong></div>
+          <div class="stat-row"><span>Bounding Box:</span> <strong id="stat-size">0 x 0 x 0</strong></div>
+        </div>
+      </aside>
+
+      <!-- Bottom Hint Bar -->
+      <footer class="hint-bar">
+        <span>Left Mouse: Rotate</span> • <span>Right Mouse: Pan</span> • <span>Scroll: Zoom</span>
+      </footer>
+    </div>
+
+    <!-- Loading Spinner Overlay -->
+    <div id="loader" class="loader-overlay hidden">
+      <div class="spinner"></div>
+      <div id="loader-text">Loading 3D asset...</div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
